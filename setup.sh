@@ -30,6 +30,9 @@ else
     fi
 fi
 
+echo "==> ufbt build (generates *_icons.h and other build-time headers)"
+ufbt
+
 echo "==> ufbt vscode_dist (generates .vscode/compile_commands.json)"
 ufbt vscode_dist
 
