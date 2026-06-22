@@ -8,10 +8,26 @@ if ! command -v ufbt &>/dev/null; then
     exit 1
 fi
 
-if [ ! -f "application.fam" ]; then
-    echo "Error: no application.fam found. Run this script from your FAP project root."
-    echo "To create a new project first: mkdir myapp && cd myapp && ufbt create APPID=myapp"
-    exit 1
+APPID="${1:-}"
+
+# Two modes:
+#   setup.sh <appid>   -> create a new project dir named <appid>, scaffold it, then configure
+#   setup.sh           -> configure the existing project in the current directory
+if [ -n "$APPID" ]; then
+    if [ -e "$APPID" ]; then
+        echo "Error: '$APPID' already exists. Pick a different appid or remove it first."
+        exit 1
+    fi
+    echo "==> creating new project '$APPID'"
+    mkdir "$APPID"
+    cd "$APPID"
+    ufbt create "APPID=$APPID"
+else
+    if [ ! -f "application.fam" ]; then
+        echo "Usage: setup.sh <appid>            # create + configure a new FAP project"
+        echo "       setup.sh                     # configure existing project (run from its root)"
+        exit 1
+    fi
 fi
 
 echo "==> ufbt vscode_dist (generates .vscode/compile_commands.json)"
@@ -48,4 +64,4 @@ Diagnostics:
 EOF
 
 echo ""
-echo "Done. Open the project in Neovim — clangd LSP and nvim-dap debugger are ready."
+echo "Done. cd $([ -n "$APPID" ] && echo "$APPID " || echo "")&& nvim . — clangd LSP and nvim-dap debugger are ready."
