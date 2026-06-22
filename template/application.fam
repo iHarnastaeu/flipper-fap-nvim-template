@@ -1,0 +1,13 @@
+App(
+    appid="__APPID__",
+    name="__APP_NAME__",
+    apptype=FlipperAppType.EXTERNAL,
+    entry_point="__APPID___app",
+    stack_size=2 * 1024,
+    fap_category="Examples",
+    fap_icon="__APPID__.png",
+    requires=["gui", "storage"],
+    # fbt globs sources recursively, so this picks up main.c and everything
+    # under src/ automatically — new files need no manifest changes.
+    sources=["*.c"],
+)
