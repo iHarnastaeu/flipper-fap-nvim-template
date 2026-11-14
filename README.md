@@ -4,6 +4,14 @@ Scaffold a new Flipper Zero application (FAP) with a real, layered architecture
 and configure it for Neovim development — clangd LSP and nvim-dap debugging — in
 a single command.
 
+## Install
+
+```sh
+git clone https://github.com/iHarnastaeu/flipper-fap-nvim-template.git ~/flipper-fap-nvim-template
+```
+
+The examples below assume that location; adjust the path if you clone elsewhere.
+
 ## Usage
 
 Create and configure a new project (architected template, the default):
@@ -97,8 +105,15 @@ your machine without a device.
 ## Requirements
 
 - [`ufbt`](https://github.com/flipperdevices/flipperzero-ufbt) in `PATH`
-- Neovim with `clangd` (via Mason) and `nvim-dap` configured for Flipper
-  (see `~/.config/nvim/lua/plugins/dap.lua`)
+- macOS (Apple Silicon or Intel) — the `.clangd` step only detects the
+  `arm64-darwin` / `x86_64-darwin` ufbt toolchains
+- Neovim with `clangd` (e.g. via Mason) for LSP
+- For debugging: `nvim-dap` configured for Flipper in your own Neovim config
+  (not provided by this repo)
+
+## License
+
+[MIT](LICENSE)
 
 ## Notes
 
